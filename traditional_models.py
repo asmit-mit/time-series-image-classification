@@ -6,8 +6,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from tslearn.neighbors import KNeighborsTimeSeriesClassifier
 
-BASE_PATH = "datasets/Earthquakes"
-OUTPUT_DIR = "train/traditional_models"
+BASE_PATH = "datasets/Earthquakes/augmented"
+OUTPUT_DIR = "train/Earthquakes/traditional_models"
 
 
 def save_result(filename, content):
@@ -39,7 +39,7 @@ def run_dtw(X_train, y_train, X_test, y_test):
     train_acc = accuracy_score(y_train, y_train_pred)
     test_acc = accuracy_score(y_test, y_test_pred)
 
-    content = f"""DTW (k=1)
+    content = f"""DTW (k=7)
 Train Accuracy: {train_acc:.4f}
 Test Accuracy : {test_acc:.4f}
 """

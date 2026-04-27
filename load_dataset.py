@@ -51,6 +51,14 @@ def main():
     print(f"\nNumber of classes: {len(np.unique(y_train))}")
     print(f"Classes: {np.unique(y_train)}")
 
+    print("\nClass distribution (Train)")
+    print("=" * 40)
+
+    unique, counts = np.unique(y_train, return_counts=True)
+
+    for cls, count in zip(unique, counts):
+        print(f"Class {cls}: {count} samples")
+
     print(f"\nLength of each time series: {X_train.shape[1]}")
 
     sample_index = 0
