@@ -1,4 +1,3 @@
-import os
 import argparse
 
 import load_dataset
@@ -18,6 +17,7 @@ def update_paths(dataset_name):
     image_path = f"{augmented_path}/images"
 
     load_dataset.BASE_DATASET_PATH = "datasets"
+    load_dataset.DATASET_NAME = dataset_name
 
     augment_dataset.INPUT_PATH = base_dataset_path
     augment_dataset.OUTPUT_PATH = augmented_path
@@ -31,10 +31,11 @@ def update_paths(dataset_name):
     train_cnn.OUTPUT_DIR = f"train/{dataset_name}/cnn"
 
 
-def run_pipeline(dataset_name):
+def run_pipeline(dataset_name, epochs):
     print(f"\n========== RUNNING PIPELINE FOR: {dataset_name} ==========\n")
 
     update_paths(dataset_name)
+    train_cnn.EPOCHS = epochs
 
     print("\n[1] Loading dataset...")
     load_dataset.main()
@@ -56,6 +57,7 @@ def run_pipeline(dataset_name):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+
     parser.add_argument(
         "--dataset",
         type=str,
@@ -63,6 +65,13 @@ if __name__ == "__main__":
         help="Dataset name (UCR format or existing folder)"
     )
 
+    parser.add_argument(
+        "--epochs",
+        type=int,
+        default=80,
+        help="Number of epochs for CNN training"
+    )
+
     args = parser.parse_args()
 
-    run_pipeline(args.dataset)
+    run_pipeline(args.dataset, args.epochs)

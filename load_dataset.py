@@ -4,17 +4,17 @@ import numpy as np
 import os
 
 BASE_DATASET_PATH = "datasets"
+DATASET_NAME = "Earthquakes"
 
 
 def main():
     print("Loading dataset...\n")
 
-    dataset_name = "Earthquakes"
     datasets = UCR_UEA_datasets()
 
     os.makedirs(BASE_DATASET_PATH, exist_ok=True)
 
-    dataset_path = os.path.join(BASE_DATASET_PATH, dataset_name)
+    dataset_path = os.path.join(BASE_DATASET_PATH, DATASET_NAME)
     os.makedirs(dataset_path, exist_ok=True)
 
     X_train_path = os.path.join(dataset_path, "X_train.npy")
@@ -33,7 +33,7 @@ def main():
     else:
         print("Downloading dataset...\n")
 
-        X_train, y_train, X_test, y_test = datasets.load_dataset(dataset_name)
+        X_train, y_train, X_test, y_test = datasets.load_dataset(DATASET_NAME)
 
         np.save(X_train_path, X_train)
         np.save(y_train_path, y_train)
@@ -42,7 +42,7 @@ def main():
 
         print("Dataset saved locally\n")
 
-    print(f"Dataset: {dataset_name}")
+    print(f"Dataset: {DATASET_NAME}")
     print("=" * 40)
 
     print(f"Train shape: {X_train.shape}")

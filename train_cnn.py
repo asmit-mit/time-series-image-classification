@@ -11,6 +11,8 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 BASE_PATH = "datasets/Earthquakes/augmented/images"
 OUTPUT_DIR = "train/Earthquakes/cnn"
 
+EPOCHS = 80
+
 
 class Model(nn.Module):
     def __init__(self, in_channels=1, num_classes=2):
@@ -128,8 +130,6 @@ def train_one_method(method_name):
 
     criterion = nn.CrossEntropyLoss(weight=weights)
     optimizer = optim.Adam(model.parameters(), lr=0.001)
-
-    EPOCHS = 80
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
